@@ -12,14 +12,6 @@ struct Complex {
 };
 
 template <typename T>
-struct Quaternion {
-    T real;
-    T i;
-    T j;
-    T k;
-};
-
-template <typename T>
 Complex<T> operator+(const Complex<T>& lhs, const Complex<T>& rhs) {
     return {lhs.real + rhs.real, lhs.imaginary + rhs.imaginary};
 }
@@ -49,12 +41,12 @@ Complex<T> complex_conjugate(const Complex<T>& alpha) {
 }
 
 template <typename T>
-T abs_complex(const Complex<T>& alpha) {
+T abs(const Complex<T>& alpha) {
     return sqrt(alpha.real * alpha.real + alpha.imaginary * alpha.imaginary);
 }
 
 template <typename T>
-Complex<T> sqrt_complex(const Complex<T>& alpha) {
+Complex<T> sqrt(const Complex<T>& alpha) {
     return {sqrt((alpha.real + abs_complex(alpha)) / 2),
             sqrt((-1 * alpha.real + abs_complex(alpha)) / 2)};
 }
