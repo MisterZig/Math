@@ -46,7 +46,7 @@ Quaternion<T> operator/(const Quaternion<T>& lhs, const Quaternion<T>& rhs) {
 }
 
 template <typename T>
-Quaternion<T> quaternion_conjugate(const Quaternion<T>& alpha) {
+Quaternion<T> conjugate(const Quaternion<T>& alpha) {
     return {alpha.real, -alpha.i, -alpha.j, -alpha.k};
 }
 
