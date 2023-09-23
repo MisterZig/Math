@@ -9,6 +9,21 @@ template <typename T>
 struct Complex {
     T real;
     T imaginary;
+
+    Complex<T>() {
+        this->real = T(0);
+        this->imaginary = T(0);
+    }
+
+    Complex<T>(T real) {
+        this->real = real;
+        this->imaginary = T(0);
+    }
+
+    Complex<T>(T real, T imaginary) {
+        this->real = real;
+        this->imaginary = imaginary;
+    }
 };
 
 template <typename T>
