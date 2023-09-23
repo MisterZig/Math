@@ -9,6 +9,21 @@ template <typename T>
 struct Complex {
     T real;
     T imaginary;
+
+    Complex<T>() {
+        this->real = T(0);
+        this->imaginary = T(0);
+    }
+
+    Complex<T>(T real) {
+        this->real = real;
+        this->imaginary = T(0);
+    }
+
+    Complex<T>(T real, T imaginary) {
+        this->real = real;
+        this->imaginary = imaginary;
+    }
 };
 
 template <typename T>
@@ -19,6 +34,11 @@ Complex<T> operator+(const Complex<T>& lhs, const Complex<T>& rhs) {
 template <typename T>
 Complex<T> operator-(const Complex<T>& lhs, const Complex<T>& rhs) {
     return {lhs.real - rhs.real, lhs.imaginary - rhs.imaginary};
+}
+
+template <typename T>
+Complex<T> operator-(const Complex<T>& rhs) {
+    return {-rhs.real, -rhs.imaginary};
 }
 
 template <typename T>
@@ -36,7 +56,7 @@ Complex<T> operator/(const Complex<T>& lhs, const Complex<T>& rhs) {
 }
 
 template <typename T>
-Complex<T> complex_conjugate(const Complex<T>& alpha) {
+Complex<T> conjugate(const Complex<T>& alpha) {
     return {alpha.real, -alpha.imaginary};
 }
 
@@ -49,6 +69,48 @@ template <typename T>
 Complex<T> sqrt(const Complex<T>& alpha) {
     return {sqrt((alpha.real + abs_complex(alpha)) / 2),
             sqrt((-1 * alpha.real + abs_complex(alpha)) / 2)};
+}
+
+// Mixed operators
+template <typename T>
+Complex<T> operator+(const Complex<T>& lhs, const T& rhs) {
+    return {lhs.real + rhs, lhs.imaginary};
+}
+
+template <typename T>
+Complex<T> operator+(const T& lhs, const Complex<T>& rhs) {
+    return {rhs.real + lhs, rhs.imaginary};
+}
+
+template <typename T>
+Complex<T> operator-(const Complex<T>& lhs, const T& rhs) {
+    return {lhs.real - rhs, lhs.imaginary};
+}
+
+template <typename T>
+Complex<T> operator-(const T& lhs, const Complex<T>& rhs) {
+    return {rhs.real - lhs, -rhs.imaginary};
+}
+
+template <typename T>
+Complex<T> operator*(const Complex<T>& lhs, const T& rhs) {
+    return {lhs.real * rhs, lhs.imaginary * rhs};
+}
+
+template <typename T>
+Complex<T> operator*(const T& lhs, const Complex<T>& rhs) {
+    return {rhs.real * lhs, rhs.imaginary * lhs};
+}
+
+template <typename T>
+Complex<T> operator/(const Complex<T>& lhs, const T& rhs) {
+    return {lhs.real / rhs, lhs.imaginary / rhs};
+}
+
+template <typename T>
+Complex<T> operator/(const T& lhs, const Complex<T>& rhs) {
+    return {lhs * rhs.real / (rhs.real * rhs.real + rhs.imaginary * rhs.imaginary),
+            -lhs * rhs.imaginary / (rhs.real * rhs.real + rhs.imaginary * rhs.imaginary)};
 }
 
 #endif // COMPLEX_NUMBERS_HPP
