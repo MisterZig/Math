@@ -3,18 +3,27 @@
 
 #include "vectorspace.hpp"
 
-namespace vector
+namespace vectorspace
 {
     template <typename T>
-    struct HilbertSpace : VectorSpace<T> {};
+    struct HilbertSpace : VectorSpace<T> {
+        HilbertSpace(VectorSpace<T> space) {
+            this->origin = space.origin;
+            this->bases = space.bases;
+        }
+    };
 
     template <typename T>
     T inner_product(const HilbertSpace<T> &space, const std::vector<T> &lhs, const std::vector<T> &rhs)
     {
-        T result = 0;
+        T result = T(0);
+        int bases_size = space.bases[0].size(); // Segfault :|
         for (int i = 0; i < space.bases.size(); i++)
         {
-            result += space.bases[i] * conjugate(lhs[i]) * rhs[i];
+            Complex<int> temp = lhs[i] * rhs[i];
+            for (int j = 0; j < bases_size; j++) {
+                result = result + space.bases[i][j] * temp;
+            }
         }
         return result;
     }

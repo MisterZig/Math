@@ -36,7 +36,9 @@ int main() {
     vectorspace::vector<Complex<int>> calc3 = u + v;
     cout << "((" << calc3.elements[0].real << " + " << calc3.elements[0].imaginary << "i) + (" << calc3.elements[1].real << " + " << calc3.elements[1].imaginary << "i) + (" << calc3.elements[2].real << " + " << calc3.elements[2].imaginary << "i))" << endl << endl;
 
+    vectorspace::HilbertSpace<Complex<int>> H = vectorspace::HilbertSpace<Complex<int>>({{Complex<int>({0, 0}), Complex<int>({0, 0}), Complex<int>({0, 0})}, {{Complex<int>({1, 0}), Complex<int>({1, 1}), Complex<int>({0, 0})}, {Complex<int>({0, 0}), Complex<int>({1, 0}), Complex<int>({1, 1})}, {Complex<int>({0, 0}), Complex<int>({0, 0}), Complex<int>({0, 1})}}});
     cout << "inner_product(u, v) = ";
-    Complex<int> calc4 = vectorspace::inner_product(vectorspace::HilbertSpace<Complex<int>>(), u.elements, v.elements);
+    Complex<int> calc4 = vectorspace::inner_product(vectorspace::HilbertSpace(V), u.elements, v.elements);
+    cout << calc4.real << " + " << calc4.imaginary << "i" << endl;
     return 0;
 }
