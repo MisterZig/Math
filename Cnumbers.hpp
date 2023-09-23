@@ -41,7 +41,7 @@ Complex<T> operator/(const Complex<T>& lhs, const Complex<T>& rhs) {
 }
 
 template <typename T>
-Complex<T> onjugate(const Complex<T>& alpha) {
+Complex<T> conjugate(const Complex<T>& alpha) {
     return {alpha.real, -alpha.imaginary};
 }
 
